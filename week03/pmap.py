@@ -203,7 +203,7 @@ if __name__ == "__main__":
             print("并发用户超过了遍历的ip，并发数采用遍历的ip数")
             netprocesslist = netprocesslist[:len(ip)]
 
-
+    #端口数便于调试，只覆盖了20-23端口
     portlist =[]
     if args.f == 'tcp':
         for i in range(20,24):
