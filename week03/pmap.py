@@ -43,7 +43,7 @@ class NetMulti(Process):
 
         
     def ipping(self):
-        result = os.system('ping %s'%self.ip)
+        result = os.system('ping %s -c 1'%self.ip)
         if result == 0:
             self.queue.put(self.ip)
             print('%s能通信'%self.ip)
@@ -126,7 +126,7 @@ class NetThread(threading.Thread):
         print(f'结束进程：{self.thread_id}')
     
     def ipping(self):
-        result = os.system('ping %s'%self.ip)
+        result = os.system('ping %s -c 1'%self.ip)
         if result == 0:
             self.queue.put(self.ip)
             print('%s能通信'%self.ip)
@@ -197,6 +197,8 @@ if __name__ == "__main__":
     if type(ip) !=list:
         iplisttemp.append(ip)
         ipiter = iter(iplisttemp)
+        print("只有一个ip，并发数采用1")
+        netprocesslist = netprocesslist[:1]
     else:
         ipiter = iter(ip)
         if len(netprocesslist) > len(ip):
@@ -295,7 +297,7 @@ if __name__ == "__main__":
     st1 = time.time()
 
     #判断是否将执行结果保存到文件中
-    if args.w !=None:
+    if args.w is not None:
         output = open(args.w,'a',encoding='utf-8') 
         if args.f == 'tcp':
             json_result ={'ip':args.ip,'test type':'tcp','port':result_list}
