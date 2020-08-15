@@ -21,7 +21,7 @@ import time
 def timer(func):
     def inner(*args,**kwargs):
         st1 = time.time()
-        func()
+        func(*args,**kwargs)
         st2 = time.time()
         inter_time = (st2-st1)
         print('执行时间:', inter_time)
